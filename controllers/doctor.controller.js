@@ -11,7 +11,7 @@ var selectAll = function (req, res) {
     }
   });
 };
-
+/////// signup for doctors
 var signup = function (req, res) {
   var {
     firstName,
@@ -52,6 +52,7 @@ var signup = function (req, res) {
     }
   });
 };
+///////////// login for doctors 
 
 var login = function (req, res) {
   var { email } = req.body;

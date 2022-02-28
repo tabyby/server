@@ -17,7 +17,16 @@ CREATE TABLE doctor (
   description varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 );
+CREATE TABLE users (
+  id int NOT NULL AUTO_INCREMENT,
+  userName varchar(50) NOT NULL,
+  email varchar(50) NOT NULL UNIQUE,
+  password varchar(200) NOT NULL,
+  phoneNumber varchar (50) NOT NULL,
+  PRIMARY KEY (ID)
+);
+
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root -p < server/database-mysql/schema.sql
+ *    mysql -u root -p <database-mysql/schema.sql
  *  to create the database and the tables.*/
