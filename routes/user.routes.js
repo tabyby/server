@@ -1,6 +1,10 @@
 const router = require('express').Router();
-const doctorController = require("../controllers/user.controller");
+const userController = require("../controllers/user.controller");
 
-router.get("/", doctorController.selectAll);
+router.get("/", userController.selectAll);
+router.post("/usersignup", userController.signup);
+router.post("/userlogin", userController.login);
+router.get("/profileUser",userController.selectAll)
+
 
 module.exports = router;
