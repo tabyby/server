@@ -4,16 +4,8 @@ var db = require("../database-mysql");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-////// 
-var selectAll = function (req, res) {
-  db.query("SELECT * FROM users ", (err, result) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(result);
-    }
-  });
-};
+
+
 //////////////// signup for users 
 var signup = function (req, res) {
   var {
@@ -22,10 +14,11 @@ var signup = function (req, res) {
     password,
     phoneNumber,
   } = req.body;
+   if(req.body.userName.length>=5&&req.body.email.length>6&&req.body.password.length>8 &&req.body.password.length<25){
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       return res.status(500).send({ msg: err });
-    } else {
+    } else  {
       db.query(
         "INSERT INTO users (userName,email,password,phoneNumber) VALUES (?,?,?,?)",
         [
@@ -41,17 +34,21 @@ var signup = function (req, res) {
             res.status(500).send(err);
           } else {
             res.status(200).send(items);
+            
           }
         }
       );
     }
-  });
+  })}else{
+    console.log("nope");
+  }
 };
+
 ///////////// login for Users
 
 var login = function (req, res) {
   var { email } = req.body;
-  db.query(`SELECT * FROM doctor WHERE email = ?`, [email], (err, result) => {
+  db.query(`SELECT * FROM users WHERE email = ?`, [email], (err, result) => {
     // user does not exists
     if (err) {
       throw err;
@@ -69,9 +66,9 @@ var login = function (req, res) {
         // wrong password
         if (bErr) {
           throw bErr;
-          return res.status(401).send({
-            msg: "Email or password is incorrect!",
-          });
+          // return res.status(401).send({
+          //   msg: "Email or password is incorrect!",
+          // });
         }
         if (bResult) {
           const token = jwt.sign(
@@ -92,6 +89,20 @@ var login = function (req, res) {
     );
   });
 };
+////// profile for user 
+var selectAll = function (req, res) {
+  var str="SELECT (userName) FROM users WHERE id=? "
+  var params=req.params.id
+  db.query(str,params, (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+      console.log(err);
+    } else {
+      res.status(200).send(result);
+    }
+  });
+};
+
 
 
 module.exports = { selectAll,signup,login };
