@@ -1,6 +1,10 @@
 var db = require("../database-mysql");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+// var JWTR =  require('jwt-redis').default;
+// var redisClient = redis.createClient();
+// var jwtr = new JWTR(redisClient);
+
 //////
 var selectAll = function (req, res) {
   db.query("SELECT * FROM items", (err, items) => {
@@ -85,6 +89,7 @@ var login = function (req, res) {
           );
 
           return res.status(200).send({
+            msg: "logged in successfully",
             token,
             user: result[0],
           });
