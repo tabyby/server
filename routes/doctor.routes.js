@@ -10,5 +10,7 @@ router.post("/login", doctorController.login);
 //       res.sendStatus(200);
 //   });
 // });
+router.post("/api/postBlogs", doctorController.insertBlogs);
+router.get("/api/selectBlogs", doctorController.selectBlogs);
 
 module.exports = router;

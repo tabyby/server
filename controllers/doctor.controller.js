@@ -15,7 +15,23 @@ var selectAll = function (req, res) {
     }
   });
 };
-
+var selectBlogs = function (req, res) {
+  db.query("SELECT * FROM blogs", (err, items) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
+var insertBlogs = function(req,res) {
+  var str = 'INSERT INTO blogs (title,img,texte) VALUES (?,?,?) '
+  var params = [req.body.title, req.body.img,req.body.texte]
+  db.query(str,params,(err,result)=>{
+    err?console.log(err):res.send(result)
+  })
+}
+/////// signup for doctors
 var signup = function (req, res) {
   var {
     firstName,
@@ -56,6 +72,7 @@ var signup = function (req, res) {
     }
   });
 };
+///////////// login for doctors 
 
 var login = function (req, res) {
   var { email } = req.body;
@@ -102,4 +119,4 @@ var login = function (req, res) {
   });
 };
 
-module.exports = { selectAll, signup, login };
+module.exports = {selectBlogs, selectAll, signup, login,insertBlogs };

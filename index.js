@@ -3,7 +3,6 @@ const adminroutes = require("./routes/admin.routes.js");
 const userroutes = require("./routes/user.routes.js");
 const doctorroutes = require("./routes/doctor.routes.js");
 const cors = require("cors");
-const authenticationRoutes = require("./routes/authentication");
 
 var items = require("./database-mysql");
 
@@ -18,7 +17,6 @@ app.use(express.static(__dirname + "/../client/public"));
 app.use("/user", userroutes);
 app.use("/doctor", doctorroutes);
 app.use("/admin", adminroutes);
-app.use("/api/authentication", authenticationRoutes);
 
 app.listen(PORT, function () {
   console.log("listening on port 3000!");
