@@ -12,6 +12,16 @@ var selectAll = function (req, res) {
     }
   });
 };
+var getAppointment = function (req,res) {
+  db.query("SELECT * FROM appointment",(err,data)=>{
+    if(err) {
+      res.status(500).send(err);
+    }
+    else {
+      res.status(200).send(data);
+    }
+  })
+}
 var selectBlogs = function (req, res) {
   db.query("SELECT * FROM blogs", (err, items) => {
     if (err) {
@@ -27,7 +37,24 @@ var insertBlogs = function(req,res) {
   db.query(str,params,(err,result)=>{
     err?console.log(err):res.send(result)
   })
-}
+};
+
+var deleteBlog = function(req,res) {
+  console.log(req.params)
+  var par=req.params.id_blog
+  console.log(par);
+  var strDelete = "DELETE FROM blogs WHERE id_blog = ?";
+  db.query(strDelete,par,(err,result)=>{
+    if(err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      res.send(result);
+    }
+  })
+};
+
 /////// signup for doctors
 var signup = function (req, res) {
   var {
@@ -117,4 +144,4 @@ var login = function (req, res) {
   });
 };
 
-module.exports = {selectBlogs, selectAll, signup, login,insertBlogs };
+module.exports = {selectBlogs, selectAll, signup, login,insertBlogs,deleteBlog ,getAppointment };
