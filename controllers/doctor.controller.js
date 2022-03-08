@@ -3,7 +3,17 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 //////
 var selectAll = function (req, res) {
-  db.query("SELECT * FROM items", (err, items) => {
+  db.query("SELECT * FROM doctor", (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(result);
+      console.log(result);
+    }
+  });
+};
+var selectBlogs = function (req, res) {
+  db.query("SELECT * FROM blogs", (err, items) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -11,6 +21,13 @@ var selectAll = function (req, res) {
     }
   });
 };
+var insertBlogs = function(req,res) {
+  var str = 'INSERT INTO blogs (title,img,texte) VALUES (?,?,?) '
+  var params = [req.body.title, req.body.img,req.body.texte]
+  db.query(str,params,(err,result)=>{
+    err?console.log(err):res.send(result)
+  })
+}
 /////// signup for doctors
 var signup = function (req, res) {
   var {
@@ -23,13 +40,14 @@ var signup = function (req, res) {
     location,
     profilePicture,
     description,
+    categoryId
   } = req.body;
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       return res.status(500).send({ msg: err });
     } else {
       db.query(
-        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,description) VALUES (?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,description,categoryId) VALUES (?,?,?,?,?,?,?,?,?,?)",
         [
           firstName,
           lastName,
@@ -40,6 +58,7 @@ var signup = function (req, res) {
           location,
           profilePicture,
           description,
+          categoryId
         ],
         (err, items) => {
           if (err) {
@@ -98,4 +117,4 @@ var login = function (req, res) {
   });
 };
 
-module.exports = { selectAll, signup, login };
+module.exports = {selectBlogs, selectAll, signup, login,insertBlogs };
