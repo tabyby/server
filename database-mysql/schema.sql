@@ -32,9 +32,34 @@ CREATE TABLE blogs (
   texte varchar(255) ,
   title varchar(50) ,
   PRIMARY KEY (id_blog)
-)
+);
+CREATE TABLE appointment (
+   id_appointment int NOT NULL AUTO_INCREMENT,
+  date varchar(255),
+  name varchar(50),
+  dateOfBirth varchar(50),
+   PRIMARY KEY(id_appointment)
+);
 
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root -p <database-mysql/schema.sql
  *  to create the database and the tables.*/
+
+
+ /*
+ dummy data will be inserted with the command   mysql -u root -p <database-mysql/schema.sql 
+ use it once
+ */
+
+ 
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (1, "med amine", "20/03/2000" , "march 24 , 2022 8:00:00");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (2, "oussama hmaied", "01/01/2002" , "march 24 , 2022 8:35:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (3, "mohamed firas ", "10/03/1998" , "march 24 , 2022 11:00:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (4, "amine beji", "15/05/2000" ,"march 24 , 2022 12:00:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (5, "mariem deriouch", "09/05/2002" ,"march 24 , 2022 9:30:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (6, "med ismail ", "30/02/1995" ,"march 24 , 2022 11:35:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (7, "yassine ben mohamed", "07/01/1998" ,"march 24 , 2022 14:15:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (8, "tayssir mohamed", "20/03/2005" ,"march 24 , 2022 15:00:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (9, "manar ben ismail", "11/07/2000" ,"march 24 , 2022 16:30:00 ");
+
