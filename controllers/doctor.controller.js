@@ -3,11 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 //////
 var selectAll = function (req, res) {
-  db.query("SELECT * FROM items", (err, items) => {
+  db.query("SELECT * FROM doctor", (err, result) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(items);
+      res.status(200).send(result);
+      console.log(result);
     }
   });
 };
@@ -66,13 +67,14 @@ var signup = function (req, res) {
     location,
     profilePicture,
     description,
+    categoryId
   } = req.body;
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       return res.status(500).send({ msg: err });
     } else {
       db.query(
-        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,description) VALUES (?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,description,categoryId) VALUES (?,?,?,?,?,?,?,?,?,?)",
         [
           firstName,
           lastName,
@@ -83,6 +85,7 @@ var signup = function (req, res) {
           location,
           profilePicture,
           description,
+          categoryId
         ],
         (err, items) => {
           if (err) {
