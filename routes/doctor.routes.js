@@ -9,5 +9,6 @@ router.get("/api/selectBlogs", doctorController.selectBlogs);
 router.delete("/api/deleteBlog/:id_blog",doctorController.deleteBlog);
 router.get("/api/getAppointment",doctorController.getAppointment);
 router.get("/doctors",doctorController.selectAll)
+router.get("/app/:id",doctorController.doctorapp)
 
 module.exports = router;
