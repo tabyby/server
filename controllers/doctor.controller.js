@@ -7,14 +7,25 @@ const jwt = require("jsonwebtoken");
 
 //////
 var selectAll = function (req, res) {
-  db.query("SELECT * FROM items", (err, items) => {
+  db.query("SELECT * FROM doctor", (err, result) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(items);
+      res.status(200).send(result);
+      console.log(result);
     }
   });
 };
+var getAppointment = function (req,res) {
+  db.query("SELECT * FROM appointment",(err,data)=>{
+    if(err) {
+      res.status(500).send(err);
+    }
+    else {
+      res.status(200).send(data);
+    }
+  })
+}
 var selectBlogs = function (req, res) {
   db.query("SELECT * FROM blogs", (err, items) => {
     if (err) {
@@ -24,14 +35,32 @@ var selectBlogs = function (req, res) {
     }
   });
 };
-var insertBlogs = function (req, res) {
-  var str = "INSERT INTO blogs (title,img,texte) VALUES (?,?,?) ";
-  var params = [req.body.title, req.body.img, req.body.texte];
-  db.query(str, params, (err, result) => {
-    err ? console.log(err) : res.send(result);
-  });
+
+var insertBlogs = function(req,res) {
+  var str = 'INSERT INTO blogs (title,img,texte) VALUES (?,?,?) '
+  var params = [req.body.title, req.body.img,req.body.texte]
+  db.query(str,params,(err,result)=>{
+    err?console.log(err):res.send(result)
+  })
 };
-///////signup for doctors
+
+var deleteBlog = function(req,res) {
+  console.log(req.params)
+  var par=req.params.id_blog
+  console.log(par);
+  var strDelete = "DELETE FROM blogs WHERE id_blog = ?";
+  db.query(strDelete,par,(err,result)=>{
+    if(err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      res.send(result);
+    }
+  })
+};
+
+/////// signup for doctors
 var signup = function (req, res) {
   var {
     firstName,
@@ -43,13 +72,14 @@ var signup = function (req, res) {
     location,
     profilePicture,
     description,
+    categoryId
   } = req.body;
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       return res.status(500).send({ msg: err });
     } else {
       db.query(
-        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,description) VALUES (?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,description,categoryId) VALUES (?,?,?,?,?,?,?,?,?,?)",
         [
           firstName,
           lastName,
@@ -60,6 +90,7 @@ var signup = function (req, res) {
           location,
           profilePicture,
           description,
+          categoryId
         ],
         (err, items) => {
           if (err) {
@@ -119,4 +150,5 @@ var login = function (req, res) {
   });
 };
 
-module.exports = { selectBlogs, selectAll, signup, login, insertBlogs };
+
+module.exports = {selectBlogs, selectAll, signup, login,insertBlogs,deleteBlog ,getAppointment };
