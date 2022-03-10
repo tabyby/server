@@ -149,6 +149,19 @@ var login = function (req, res) {
     );
   });
 };
+/////////// this is for evry doctor appointement 
 
 
-module.exports = {selectBlogs, selectAll, signup, login,insertBlogs,deleteBlog ,getAppointment };
+var doctorapp=function(req,res){
+  var str="select * from appointment where id=(SELECT ID FROM doctor WHERE id=?)"
+  var params=[req.params.id]
+  db.query(str,params,(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.send(result)
+    }
+  })
+}
+
+module.exports = {selectBlogs, selectAll, signup, login,insertBlogs,deleteBlog ,getAppointment,doctorapp };
