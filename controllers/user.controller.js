@@ -1,9 +1,6 @@
-
-
 var db = require("../database-mysql");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 
 
 //////////////// signup for users 
@@ -23,7 +20,6 @@ var signup = function (req, res) {
         "INSERT INTO users (userName,email,password,phoneNumber) VALUES (?,?,?,?)",
         [
           userName,
-
           email,
           hash,
           phoneNumber,

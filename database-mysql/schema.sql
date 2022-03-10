@@ -32,6 +32,13 @@ CREATE TABLE blogs (
   texte varchar(255) ,
   title varchar(50) ,
   PRIMARY KEY (id_blog)
+)
+CREATE TABLE admins (
+    id int NOT NULL AUTO_INCREMENT,
+   email varchar(50) NOT NULL UNIQUE,
+  password varchar(200) NOT NULL,
+    PRIMARY KEY (ID)
+)
 );
 CREATE TABLE appointment (
    id_appointment int NOT NULL AUTO_INCREMENT,
