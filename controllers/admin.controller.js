@@ -72,6 +72,7 @@ var login = function (req, res) {
             msg: "logged in successfully",
             token,
             user: result[0],
+            
           });
         }
         return res.status(401).send({
@@ -82,7 +83,7 @@ var login = function (req, res) {
   });
 };
 
-module.exports = { selectAll, login, insertAdmins, signup };
+// module.exports = { selectAll, login, insertAdmins, signup };
 
 var getUsers = function (req,res){
   db.query("SELECT * FROM users",(err,data)=>{
@@ -131,4 +132,4 @@ var deleteUsers = function(req,res){
 
 
 
-module.exports = { selectAll,getUsers,deleteUsers,getDocs,deleteDocs };
+module.exports = { selectAll,getUsers,deleteUsers,getDocs,deleteDocs,login,signup,insertAdmins };

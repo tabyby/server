@@ -32,13 +32,12 @@ CREATE TABLE blogs (
   texte varchar(255) ,
   title varchar(50) ,
   PRIMARY KEY (id_blog)
-)
+);
 CREATE TABLE admins (
     id int NOT NULL AUTO_INCREMENT,
    email varchar(50) NOT NULL UNIQUE,
   password varchar(200) NOT NULL,
     PRIMARY KEY (ID)
-)
 );
 CREATE TABLE appointment (
    id_appointment int NOT NULL AUTO_INCREMENT,
@@ -62,7 +61,7 @@ CREATE TABLE appointment (
 
  
 INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (1, "med amine", "20/03/2000" , "march 24 , 2022 8:00:00");
-INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (2, "oussama hmaied", "01/01/2002" , "march 24 , 2022 8:35:00 ");
+INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (2, "oussama hmaied", "01/01/2002" , "march 24 , 2022 9:30:00 ");
 INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (3, "mohamed firas ", "10/03/1998" , "march 24 , 2022 11:00:00 ");
 INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (4, "amine beji", "15/05/2000" ,"march 24 , 2022 12:00:00 ");
 INSERT INTO appointment (id_appointment, name , dateOfBirth , date) VALUES (5, "mariem deriouch", "09/05/2002" ,"march 24 , 2022 9:30:00 ");
@@ -79,4 +78,7 @@ INSERT INTO doctor (categoryId, firstName , lastName , email,password,phoneNumbe
 INSERT INTO doctor (categoryId, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (2, "ismail ", "hajjri" ,"ismail10@gmail.com ",010101,21525300,"generalist","nabeul","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR00bEG-Dg_zwvNP2jW-MLoVUrngi8-jcv_Fg&usqp=CAU","affordable");
 INSERT INTO doctor (categoryId, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (3, "Mohamed ", "amara" ,"medAmara@gmail.com ",30202,95882300,"generalist","gabes","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdYH9LOCeevgvM5rFislbyayG4ebmIjvzTjw&usqp=CAU","affordable");
 INSERT INTO doctor (categoryId, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (4, "lotfi", "abasso" ,"lotfi02@gmail.com ",998884,72225360,"generalist","mednin","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWd4up8SXxs2T2bawqnzFpylHHlks6O-AIkQ&usqp=CAU","affordable");
-
+INSERT INTO admins (id,email,password) VALUES (1,"medmedaminebensalah@gmail.com","123456789");
+INSERT INTO admins (id,email,password) VALUES (2,"oussamahmaied@gmail.com","123456789");
+INSERT INTO admins (id,email,password) VALUES (3,"badisNaceur@gmail.com","$2a$10$S5Ti.ZcihmOOmF308Hv00ujPOJ5tu11rAneSSgBsnOYaSEU81m/s.");
+INSERT INTO admins (id,email,password) VALUES (4,"mortadha@gmail.com","123456789");
