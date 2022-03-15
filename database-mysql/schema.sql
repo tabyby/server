@@ -15,7 +15,11 @@ CREATE TABLE doctor (
   field varchar(50) NOT NULL,
   location varchar(50) NOT NULL,
   profilePicture varchar(500) NOT NULL,
-  description varchar(50) NOT NULL,
+  university varchar(250) NOT NULL,
+  yearsofexperience varchar(250) NOT NULL,
+  cnam varchar(50) NOT NULL,
+  latitude varchar(250) NOT NULL,
+  longtitude varchar(250) NOT NULL,
   PRIMARY KEY (ID)
 );
 CREATE TABLE users (
@@ -32,26 +36,26 @@ CREATE TABLE blogs (
   texte varchar(255) ,
   title varchar(50) ,
   PRIMARY KEY (id_blog)
-)
+);
 CREATE TABLE admins (
-    id int NOT NULL AUTO_INCREMENT,
+   id int NOT NULL AUTO_INCREMENT,
    email varchar(50) NOT NULL UNIQUE,
-  password varchar(200) NOT NULL,
-    PRIMARY KEY (ID)
-)
+   password varchar(200) NOT NULL,
+   PRIMARY KEY (ID)
 );
 CREATE TABLE appointment (
-   id_appointment int NOT NULL AUTO_INCREMENT,
+  id_appointment int NOT NULL AUTO_INCREMENT,
+  time int NOT NULL (255),
   date varchar(255),
   name varchar(50),
   dateOfBirth varchar(50),
-   PRIMARY KEY(id_appointment)
+  PRIMARY KEY(id_appointment)
 );
 
 
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root -p <database-mysql/schema.sql
+ *  mysql -u root -p <database-mysql/schema.sql
  *  to create the database and the tables.*/
 
 
@@ -75,8 +79,8 @@ INSERT INTO users (id, userName , email , password,phoneNumber) VALUES (2, "mari
 INSERT INTO users (id, userName , email , password,phoneNumber) VALUES (3, "med amine", "amine@gmail.com" ,"password123 ",97885336);
 INSERT INTO users (id, userName , email , password,phoneNumber) VALUES (4, "saif eddin", "saifEddin@gmail.com" ,"azerty123 ",21002006);
 INSERT INTO users (id, userName , email , password,phoneNumber) VALUES (5, "oussama dbich", "oussama06@gmail.com" ,"12300532 ",55663352);
-INSERT INTO doctor (id, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (1, "Mohamed ", "mokhtar" ,"medmokhtar@gmail.com ",123456,20220369,"dentist","tunisia","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrL4w1NtHPw6bxuWcWjnwWwb0gvInEe0qC9g&usqp=CAU","affordable");
-INSERT INTO doctor (id, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (2, "ismail ", "hajjri" ,"ismail10@gmail.com ",010101,21525300,"generalist","nabeul","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR00bEG-Dg_zwvNP2jW-MLoVUrngi8-jcv_Fg&usqp=CAU","affordable");
-INSERT INTO doctor (id, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (3, "Mohamed ", "amara" ,"medAmara@gmail.com ",30202,95882300,"generalist","gabes","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdYH9LOCeevgvM5rFislbyayG4ebmIjvzTjw&usqp=CAU","affordable");
-INSERT INTO doctor (id, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (4, "lotfi", "abasso" ,"lotfi02@gmail.com ",998884,72225360,"generalist","mednin","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWd4up8SXxs2T2bawqnzFpylHHlks6O-AIkQ&usqp=CAU","affordable");
+INSERT INTO doctor (id,categoryId, firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (1,1, "Mohamed ", "mokhtar" ,"medmokhtar@gmail.com ",123456,20220369,"dentist","tunisia","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrL4w1NtHPw6bxuWcWjnwWwb0gvInEe0qC9g&usqp=CAU","affordable");
+INSERT INTO doctor (id,categoryId ,firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (2,2, "ismail ", "hajjri" ,"ismail10@gmail.com ",010101,21525300,"generalist","nabeul","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR00bEG-Dg_zwvNP2jW-MLoVUrngi8-jcv_Fg&usqp=CAU","affordable");
+INSERT INTO doctor (id,categoryId ,firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (3,3, "Mohamed ", "amara" ,"medAmara@gmail.com ",30202,95882300,"generalist","gabes","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdYH9LOCeevgvM5rFislbyayG4ebmIjvzTjw&usqp=CAU","affordable");
+INSERT INTO doctor (id,categoryId ,firstName , lastName , email,password,phoneNumber,field,location,profilePicture,description) VALUES (4,4, "lotfi", "abasso" ,"lotfi02@gmail.com ",998884,72225360,"generalist","mednin","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWd4up8SXxs2T2bawqnzFpylHHlks6O-AIkQ&usqp=CAU","affordable");
 
