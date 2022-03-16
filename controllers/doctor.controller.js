@@ -66,32 +66,33 @@ var signup = function (req, res) {
     email,
     password,
     phoneNumber,
+    categoryId,
     field,
-    location,
     profilePicture,
     university,
-    categoryId,
+    yearsofexperience,
+    cnam,
   } = req.body;
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       return res.status(500).send({ msg: err });
     } else {
       db.query(
-        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,university,yearsofexperience,cnam,latitude,longtitude,categoryId) VALUES (?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,categoryId,field,profilePicture,university,yearsofexperience,cnam,latitude,longtitude) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           firstName,
           lastName,
           email,
           hash,
           phoneNumber,
+          categoryId,
           field,
-          location,
           profilePicture,
           university,
           yearsofexperience,
+          cnam,
           req.body.latitude,
           req.body.longtitude,
-          categoryId,
         ],
         (err, items) => {
           if (err) {

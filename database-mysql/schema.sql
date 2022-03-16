@@ -13,7 +13,6 @@ CREATE TABLE doctor (
   phoneNumber varchar (50) NOT NULL,
   categoryId varchar(25) NOT NULL,
   field varchar(50) NOT NULL,
-  location varchar(50) NOT NULL,
   profilePicture varchar(500) NOT NULL,
   university varchar(250) NOT NULL,
   yearsofexperience varchar(250) NOT NULL,
