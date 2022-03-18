@@ -1,6 +1,10 @@
 var db = require("../database-mysql");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+// var JWTR =  require('jwt-redis').default;
+// var redisClient = redis.createClient();
+// var jwtr = new JWTR(redisClient);
+
 //////
 var selectAll = function (req, res) {
   db.query("SELECT * FROM doctor", (err, result) => {
@@ -31,6 +35,7 @@ var selectBlogs = function (req, res) {
     }
   });
 };
+
 var insertBlogs = function(req,res) {
   var str = 'INSERT INTO blogs (title,img,texte) VALUES (?,?,?) '
   var params = [req.body.title, req.body.img,req.body.texte]
@@ -98,7 +103,7 @@ var signup = function (req, res) {
     }
   });
 };
-///////////// login for doctors 
+///////////// login for doctors
 
 var login = function (req, res) {
   var { email } = req.body;
@@ -132,6 +137,7 @@ var login = function (req, res) {
           );
 
           return res.status(200).send({
+            msg: "logged in successfully",
             token,
             user: result[0],
           });
@@ -143,5 +149,19 @@ var login = function (req, res) {
     );
   });
 };
+/////////// this is for evry doctor appointement 
 
-module.exports = {selectBlogs, selectAll, signup, login,insertBlogs,deleteBlog ,getAppointment };
+
+var doctorapp=function(req,res){
+  var str="select * from appointment where id=(SELECT ID FROM doctor WHERE id=?)"
+  var params=[req.params.id]
+  db.query(str,params,(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.send(result)
+    }
+  })
+}
+
+module.exports = {selectBlogs, selectAll, signup, login,insertBlogs,deleteBlog ,getAppointment,doctorapp };
