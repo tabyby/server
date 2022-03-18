@@ -118,8 +118,8 @@ var deleteDocs = function(req,res) {
 }
 
 var deleteUsers = function(req,res){
-  var par = req.params.id
-  var strDel = "DELETE FROM users WHERE id = ?";
+  var par = req.params.id_user
+  var strDel = "DELETE FROM users WHERE id_user = ?";
   db.query(strDel,par,(err,result)=>{
     if(err){
       res.status(404).send(err);
