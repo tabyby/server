@@ -13,10 +13,13 @@ CREATE TABLE doctor (
   phoneNumber varchar (50) NOT NULL,
   categoryId varchar(25) NOT NULL,
   field varchar(50) NOT NULL,
-  location varchar(50) NOT NULL,
   profilePicture varchar(500) NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (id)
+  university varchar(250) NOT NULL,
+  yearsofexperience varchar(250) NOT NULL,
+  cnam varchar(50) NOT NULL,
+  latitude varchar(250) NOT NULL,
+  longtitude varchar(250) NOT NULL,
+  PRIMARY KEY (ID)
 );
 CREATE TABLE users (
   id_user int NOT NULL AUTO_INCREMENT,
@@ -32,16 +35,15 @@ CREATE TABLE blogs (
   texte varchar(255) ,
   title varchar(50) ,
   PRIMARY KEY (id_blog)
-)
+);
 CREATE TABLE admins (
-    id int NOT NULL AUTO_INCREMENT,
+   id int NOT NULL AUTO_INCREMENT,
    email varchar(50) NOT NULL UNIQUE,
-  password varchar(200) NOT NULL,
-    PRIMARY KEY (ID)
-)
+   password varchar(200) NOT NULL,
+   PRIMARY KEY (ID)
 );
 CREATE TABLE appointment (
-   id_appointment int NOT NULL AUTO_INCREMENT,
+  id_appointment int NOT NULL AUTO_INCREMENT,
   date varchar(255),
   name varchar(50),
   dateOfBirth varchar(50),
@@ -58,7 +60,7 @@ CREATE TABLE appointment (
 
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root -p <database-mysql/schema.sql
+ *  mysql -u root -p <database-mysql/schema.sql
  *  to create the database and the tables.*/
 
 

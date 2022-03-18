@@ -16,16 +16,15 @@ var selectAll = function (req, res) {
     }
   });
 };
-var getAppointment = function (req,res) {
-  db.query("SELECT * FROM appointment",(err,data)=>{
-    if(err) {
+var getAppointment = function (req, res) {
+  db.query("SELECT * FROM appointment", (err, data) => {
+    if (err) {
       res.status(500).send(err);
-    }
-    else {
+    } else {
       res.status(200).send(data);
     }
-  })
-}
+  });
+};
 var selectBlogs = function (req, res) {
   db.query("SELECT * FROM blogs", (err, items) => {
     if (err) {
@@ -36,28 +35,27 @@ var selectBlogs = function (req, res) {
   });
 };
 
-var insertBlogs = function(req,res) {
-  var str = 'INSERT INTO blogs (title,img,texte) VALUES (?,?,?) '
-  var params = [req.body.title, req.body.img,req.body.texte]
-  db.query(str,params,(err,result)=>{
-    err?console.log(err):res.send(result)
-  })
+var insertBlogs = function (req, res) {
+  var str = "INSERT INTO blogs (title,img,texte) VALUES (?,?,?) ";
+  var params = [req.body.title, req.body.img, req.body.texte];
+  db.query(str, params, (err, result) => {
+    err ? console.log(err) : res.send(result);
+  });
 };
 
-var deleteBlog = function(req,res) {
-  console.log(req.params)
-  var par=req.params.id_blog
+var deleteBlog = function (req, res) {
+  console.log(req.params);
+  var par = req.params.id_blog;
   console.log(par);
   var strDelete = "DELETE FROM blogs WHERE id_blog = ?";
-  db.query(strDelete,par,(err,result)=>{
-    if(err) {
+  db.query(strDelete, par, (err, result) => {
+    if (err) {
       console.log(err);
       res.send(err);
-    }
-    else {
+    } else {
       res.send(result);
     }
-  })
+  });
 };
 
 /////// signup for doctors
@@ -68,29 +66,33 @@ var signup = function (req, res) {
     email,
     password,
     phoneNumber,
+    categoryId,
     field,
-    location,
     profilePicture,
-    description,
-    categoryId
+    university,
+    yearsofexperience,
+    cnam,
   } = req.body;
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       return res.status(500).send({ msg: err });
     } else {
       db.query(
-        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,field,location,profilePicture,description,categoryId) VALUES (?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO doctor (firstName,lastName,email,password,phoneNumber,categoryId,field,profilePicture,university,yearsofexperience,cnam,latitude,longtitude) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           firstName,
           lastName,
           email,
           hash,
           phoneNumber,
+          categoryId,
           field,
-          location,
           profilePicture,
-          description,
-          categoryId
+          university,
+          yearsofexperience,
+          cnam,
+          req.body.latitude,
+          req.body.longtitude,
         ],
         (err, items) => {
           if (err) {
@@ -149,19 +151,28 @@ var login = function (req, res) {
     );
   });
 };
-/////////// this is for evry doctor appointement 
+/////////// this is for evry doctor appointement
 
-
-var doctorapp=function(req,res){
-  var str="select * from appointment where id=(SELECT ID FROM doctor WHERE id=?)"
-  var params=[req.params.id]
-  db.query(str,params,(err,result)=>{
-    if(err){
+var doctorapp = function (req, res) {
+  var str =
+    "select * from appointment where id=(SELECT ID FROM doctor WHERE id=?)";
+  var params = [req.params.id];
+  db.query(str, params, (err, result) => {
+    if (err) {
       console.log(err);
-    }else{
-      res.send(result)
+    } else {
+      res.send(result);
     }
-  })
-}
+  });
+};
 
-module.exports = {selectBlogs, selectAll, signup, login,insertBlogs,deleteBlog ,getAppointment,doctorapp };
+module.exports = {
+  selectBlogs,
+  selectAll,
+  signup,
+  login,
+  insertBlogs,
+  deleteBlog,
+  getAppointment,
+  doctorapp,
+};
